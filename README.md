@@ -130,21 +130,22 @@ This project aims to intelligently match job seekers with companies by combining
 
 Open a terminal and run:
 
-```` ```bash ````
+```` bash 
 cd backend_c
 gcc -o jobmatching main.c structures.c
- ```` ``` ```` 
+
+ ````  
 
 
 ### 2. Run the Flask Web Application
 
 Open a terminal and run:
 
-```` ```bash ````
+```` bash 
 cd webapp
 pip install -r ../requirements.txt  # Install required Python packages if not done yet
 python app.py
- ```` ``` ```` 
+ ```` 
 
 
 ---
