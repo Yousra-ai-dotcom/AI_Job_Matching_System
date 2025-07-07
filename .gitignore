@@ -1,0 +1,17 @@
+# Fichiers Python
+__pycache__/
+*.pyc
+
+# Fichiers compilés C
+jobmatching
+*.o
+output_matching.csv
+
+# Fichiers temporaires
+input.txt
+temp_seekers.txt
+temp_companies.txt
+webapp/input.txt
+
+# Système (macOS)
+.DS_Store

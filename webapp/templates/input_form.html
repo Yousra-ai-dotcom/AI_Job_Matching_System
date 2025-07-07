@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Job Seekers and Companies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Add Job Seekers and Companies</h2>
+
+    <form method="POST">
+        <label>Entity type:</label><br>
+        <select name="entity_type" required>
+            <option value="seeker">Job Seeker</option>
+            <option value="company">Company</option>
+        </select><br><br>
+
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Skills (comma separated):</label><br>
+        <input type="text" name="skills" required><br><br>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Current Job Seekers</h3>
+    <ul>
+    {% for seeker in seekers %}
+        <li>{{ seeker.name }} — Skills: {{ seeker.skills | join(', ') }}</li>
+    {% else %}
+        <li>No job seekers added yet.</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Current Companies</h3>
+    <ul>
+    {% for company in companies %}
+        <li>{{ company.name }} — Skills: {{ company.skills | join(', ') }}</li>
+    {% else %}
+        <li>No companies added yet.</li>
+    {% endfor %}
+    </ul>
+
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+</body>
+</html>

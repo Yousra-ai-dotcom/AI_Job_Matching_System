@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Job Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>AI Job Recommendation</h2>
+
+    <form method="POST">
+        <label>Skills (comma separated):</label><br>
+        <input type="text" name="skills" required><br><br>
+
+        <label>Years of experience:</label><br>
+        <input type="number" name="experience" step="0.1" required><br><br>
+
+        <label>Job category:</label><br>
+        <input type="text" name="category" required><br><br>
+
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendation %}
+        <h3>Top Job Matches:</h3>
+        <ul>
+        {% for job in recommendation %}
+            <li>{{ job }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+</body>
+</html>

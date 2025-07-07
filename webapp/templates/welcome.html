@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+  <h1 class="mb-4">Welcome to AI-Based Job Matching System</h1>
+  <p class="lead">
+    This system models job seekers and companies as a bipartite graph, uses graph traversal algorithms (DFS, BFS) to find matches,
+    implements priority matching with weighted graphs, and enables efficient job searches with adjacency lists.
+    It also integrates AI-based recommendations using KNN.
+  </p>
+  <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg mt-3">Go to Dashboard</a>
+</div>
+{% endblock %}

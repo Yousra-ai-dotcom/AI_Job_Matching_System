@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ algo }} Results</h2>
+
+  {% if output %}
+    <pre style="background:#f8f9fa; padding:20px; border-radius:8px;">{{ output }}</pre>
+  {% elif job_matches %}
+    <h4>AI-Based Recommendations</h4>
+    <ul>
+      {% for job in job_matches %}
+        <li>{{ job }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No output to display.</p>
+  {% endif %}
+
+  <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+</div>
+{% endblock %}

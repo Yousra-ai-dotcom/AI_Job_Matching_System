@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Add Job Seeker</h4>
+    <form method="post" action="{{ url_for('add_seeker') }}">
+      <div class="mb-3">
+        <label>Name</label>
+        <input name="name" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label>Skills (comma separated)</label>
+        <input name="skills" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label>Experience (years)</label>
+        <input name="experience" type="number" step="0.1" min="0" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label>Job Category</label>
+        <input name="category" class="form-control" required />
+      </div>
+      <button class="btn btn-success">Add Seeker</button>
+    </form>
+
+    <hr />
+    <h4>Add Company</h4>
+    <form method="post" action="{{ url_for('add_company') }}">
+      <div class="mb-3">
+        <label>Name</label>
+        <input name="name" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label>Required Skills (comma separated)</label>
+        <input name="skills" class="form-control" required />
+      </div>
+      <button class="btn btn-primary">Add Company</button>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h4>Current Job Seekers</h4>
+    <ul class="list-group mb-4">
+      {% if seekers %}
+        {% for s in seekers %}
+          <li class="list-group-item">
+            <strong>{{ s.name }}</strong> — Skills: {{ s.skills | join(', ') }}, Experience: {{ s.experience }} years, Category: {{ s.category }}
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="list-group-item">No seekers added yet.</li>
+      {% endif %}
+    </ul>
+
+    <h4>Current Companies</h4>
+    <ul class="list-group mb-4">
+      {% if companies %}
+        {% for c in companies %}
+          <li class="list-group-item">
+            <strong>{{ c.name }}</strong> — Skills Required: {{ c.skills | join(', ') }}
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="list-group-item">No companies added yet.</li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+<hr />
+
+<h3>Graph Algorithms</h3>
+<div class="row">
+  <div class="col-md-4">
+    <form method="get" action="{{ url_for('run_graph', cmd='dfs') }}">
+      <label>DFS start seeker index:</label>
+      <input type="number" name="start" value="0" min="0" max="{{ seekers|length - 1 }}" class="form-control mb-2" required />
+      <button class="btn btn-outline-primary w-100">Run DFS</button>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <form method="get" action="{{ url_for('run_graph', cmd='bfs') }}">
+      <label>BFS start seeker index:</label>
+      <input type="number" name="start" value="0" min="0" max="{{ seekers|length - 1 }}" class="form-control mb-2" required />
+      <button class="btn btn-outline-primary w-100">Run BFS</button>
+    </form>
+  </div>
+  <div class="col-md-4 d-flex flex-column">
+    <form method="get" action="{{ url_for('run_graph', cmd='match') }}" class="mb-2">
+      <button class="btn btn-outline-success w-100 mt-auto">Run Priority Matching</button>
+    </form>
+  </div>
+</div>
+
+<hr />
+
+<h3>AI Recommendation</h3>
+<form method="post" action="{{ url_for('run_ai_recommend') }}">
+  <div class="mb-3">
+    <label>Skills (comma separated)</label>
+    <input name="skills" class="form-control" required />
+  </div>
+  <div class="mb-3">
+    <label>Experience (years)</label>
+    <input name="experience" type="number" step="0.1" min="0" class="form-control" required />
+  </div>
+  <div class="mb-3">
+    <label>Job Category</label>
+    <input name="category" class="form-control" required />
+  </div>
+  <button class="btn btn-warning w-100">Get AI Recommendation</button>
+</form>
+
+{% endblock %}
